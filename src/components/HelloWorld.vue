@@ -90,6 +90,19 @@ export default {
     return {
       msg: 'Welcome to Your Vue.js App'
     }
+  },
+  mounted() {
+    console.log("yes")
+    this.$axios.post('user/login',{
+      username: '123',
+      password: '123'
+    },{
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }
+    }).then((res) => {
+      var data = res.data.data;
+    })
   }
 }
 </script>
