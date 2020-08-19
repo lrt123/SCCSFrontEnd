@@ -11,10 +11,9 @@
       :append-to-body="true"
       center
     >
-      <template >
+      <template>
         <span class="releasetime">发布时间：{{releaseTime}}</span>
-        &nbsp;
-        <span >发布人：{{publisher}}</span>
+        <span>发布人：{{publisher}}</span>
       </template>
       <el-container
         class="container"
@@ -45,28 +44,46 @@
         centerDialogVisible: false
       }
     },
+    methods: {
+      formatDate: function (date) {
+        var date = new Date(date);
+        var YY = date.getFullYear() + '-';
+        var MM = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
+        var DD = (date.getDate() < 10 ? '0' + (date.getDate()) : date.getDate());
+        var hh = (date.getHours() < 10 ? '0' + date.getHours() : date.getHours()) + ':';
+        var mm = (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()) + ':';
+        var ss = (date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds());
+        return YY + MM + DD + " " + hh + mm + ss;
+      }
+    },
     mounted() {
-      this.$axios.get('/inform/get').then(res => {
+      let id = this.$route.params.id
+      this.$axios.get('/inform/get/'+id).then(res => {
         console.log("rec")
         let data = res.data.data;
         let message = data.message;
         let reg = new RegExp('\r\n', 'g')//g代表全部
         message = message.replace(reg, '<br>');
         this.msg = message;
-        console.log(this.msg)
+        this.publisher = data.publisher;
+        this.title = data.title;
+        this.releaseTime = this.formatDate(data.starttime)
       })
     }
   }
 </script>
 
 <style scoped>
-  .container{
-    height: 600px;width: 100%
+  .container {
+    height: 600px;
+    width: 100%
   }
-  span, p{
+
+  span, p {
     font-size: 20px;
   }
-  .releasetime{
+
+  .releasetime {
     margin-left: 30%;
   }
 </style>
