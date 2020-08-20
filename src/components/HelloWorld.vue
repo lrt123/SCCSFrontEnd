@@ -93,15 +93,8 @@ export default {
   },
   mounted() {
     console.log("yes")
-    this.$axios.post('user/login',{
-      username: '123',
-      password: '123'
-    },{
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      }
-    }).then((res) => {
-      var data = res.data.data;
+    this.$axios.get('menulist').then(res => {
+      console.log(res.data.data)
     })
   }
 }
