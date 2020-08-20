@@ -14,18 +14,24 @@
           v-for="(inform, index) in informs"
           :key="index"
           :timestamp="inform.starttime">
-          <router-link :to="'/inform/'+inform.id">{{inform.title}}</router-link>
+          <el-button :id="index" type="text" class="informTitle" @click="reverseVisible(inform.id,index)">{{inform.title}}</el-button>
         </el-timeline-item>
       </el-timeline>
     </div>
+    <inform-view v-if="dialog_visible" :dialog_visible="dialog_visible" :informid="informid" @closeDialog="closeDialog"/>
   </div>
 </template>
 
 <script>
+  import InformView from "./InformView";
+
   export default {
     name: "InformList",
+    components: {InformView},
     data() {
       return {
+        informid: '',
+        dialog_visible: false,
         reverse: true,
         informs: []
       }
@@ -40,6 +46,18 @@
         var mm = (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()) + ':';
         var ss = (date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds());
         return YY + MM + DD + " " + hh + mm + ss;
+      },
+      reverseVisible: function (informid,id) {
+        document.getElementById(id).style.color = "gray"
+        this.informid = informid;
+        if (this.dialog_visible) {
+          this.dialog_visible = false;
+        } else {
+          this.dialog_visible = true;
+        }
+      },
+      closeDialog: function () {
+        this.dialog_visible = false;
       }
     },
     mounted() {
@@ -60,26 +78,8 @@
 </script>
 
 <style scoped>
-  a:link {
-    color: black
-  }
-
-  a:visited {
-    color: gray
-  }
-
-  a:hover {
-    color: blue;
-    text-decoration: underline;
-
-  }
-
-  a:active {
-    color: blue
-  }
-
-  /* 鼠标点中激活链接 蓝色 */
-  a {
-    text-decoration: none;
-  }
+.informTitle{
+  font-size: 16px;
+  color: black;
+}
 </style>
