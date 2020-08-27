@@ -1,11 +1,12 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
-import InformView from "../components/InformView";
-import InformList from "../components/InformList";
-import InformCreate from "../components/InformCreate";
-import InformManager from "../components/InformManager";
-import InformEdit from "../components/InformEdit";
+import InformView from "../components/Inform/InformView";
+import InformList from "../components/Inform/InformList";
+import InformCreate from "../components/Inform/InformCreate";
+import InformManager from "../components/Inform/InformManager";
+import InformEdit from "../components/Inform/InformEdit";
+import LateRegister from "../components/CourseManagement/LateRegister";
 
 Vue.use(Router)
 
@@ -41,6 +42,11 @@ export default new Router({
       name: "InformEdit",
       component: InformEdit,
       props: true
+    },
+    {
+      path: '/lateregister',
+      name: "LateRegister",
+      component: LateRegister
     }
   ]
 })

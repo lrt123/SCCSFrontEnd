@@ -12,7 +12,7 @@ axios.defaults.baseURL = '/'
 Vue.use(ElementUI)
 Vue.config.productionTip = false
 // 需要与后端对接时注释掉
-// require('./mock')
+require('./mock')
 
 /* eslint-disable no-new */
 new Vue({
