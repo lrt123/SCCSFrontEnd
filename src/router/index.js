@@ -11,6 +11,8 @@ import Welcome from '../components/welcome'
 import SaveUser from '../components/User/SaveUser'
 import GetAllUser from '../components/User/GetAllUser'
 import UpdateUser from '../components/User/UpdateUser'
+import LateRegister from "../components/CourseManagement/LateRegister";
+
 Vue.use(Router)
 
 export default new Router({
@@ -62,6 +64,11 @@ export default new Router({
           name: "InformEdit",
           component: InformEdit,
           props: true
+        },
+        {
+          path: '/lateregister',
+          name: "LateRegister",
+          component: LateRegister
         }
       ]
     },
