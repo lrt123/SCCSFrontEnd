@@ -19,35 +19,61 @@
                  active-text-color="#409EFF" unique-opened :collapse="isCollapse" :collapse-transition="false"
                  :default-active="activePath">
           <!--一级菜单-->
-          <el-submenu :index="item.menuid + ''" v-for="item in menulist" :key="item.menuid">
-            <!--一级菜单模板-->
-            <template slot="title">
-              <!--图标-->
-              <i class="el-icon-menu"></i>
-              <!--文本-->
-              <span>{{item.menuname}}</span>
+          <template v-for="item in menulist">
+            <template v-if="item.childMenus">
+              <el-submenu :index="item.menuid + ''" :key="item.menuid">
+                <!--一级菜单模板-->
+                <template slot="title">
+                  <!--图标-->
+                  <i class="el-icon-menu"></i>
+                  <!--文本-->
+                  <span>{{item.menuname}}</span>
+                </template>
+                <template v-for="subItem in item.childMenus">
+                  <template v-if="subItem.childMenus.length>0">
+                    <el-submenu :index="subItem.menuid + ''" :key="subItem.menuid">
+                      <template slot="title">
+                      <!--图标-->
+                      <i class="el-icon-menu"></i>
+                      <!--文本-->
+                      <span>{{subItem.menuname}}</span>
+                      </template>
+                      <el-menu-item :index="'/' + lastItem.url" v-for="lastItem in subItem.childMenus" :key="lastItem.menuid" @click="saveNavState('/' + lastItem.url)">
+                        <template slot="title">
+                          <!--图标-->
+                          <i class="el-icon-location"></i>
+                          <!--文本-->
+                          <span>{{lastItem.menuname}}</span>
+                        </template>
+                      </el-menu-item>
+                    </el-submenu>  
+                  </template>
+                  <template v-else>
+                    <el-menu-item :index="subItem.url" :key="subItem.menuid" @click="saveNavState( subItem.url)">
+                      <template slot="title">
+                        <!--图标-->
+                        <i class="el-icon-location"></i>
+                        <!--文本-->
+                        <span>{{subItem.menuname}}</span>
+                      </template>
+                    </el-menu-item>
+                  </template>
+                </template>
+              </el-submenu>
             </template>
-            <!--二级菜单-->
-            <el-menu-item :index="'/' + subItem.url" v-for="subItem in item.childMenus" :key="subItem.menuid" @click="saveNavState('/' + subItem.url)">
-              <template slot="title">
-                <!--图标-->
-                <i class="el-icon-location"></i>
-                <!--文本-->
-                <span>{{subItem.menuname}}</span>
-              </template>
-              <!--三级菜单-->
-              <!-- <el-menu-item :index="'/' + lastItem.url" v-for="lastItem in subItem.childMenus" :key="lastItem.menuid" @click="">
-                <template slot="title"> -->
-              <!--图标-->
-              <!-- <i class="el-icon-location"></i> -->
-              <!--文本-->
-              <!-- <span>{{lastItem.menuname}}</span>
+            <template v-else>
+              <el-menu-item :index="'/' + item.url"  :key="item.menuid" @click="saveNavState('/' + item.url)">
+                  <template slot="title">
+                    <!--图标-->
+                    <i class="el-icon-location"></i>
+                    <!--文本-->
+                    <span>{{item.menuname}}</span>
+                  </template>
+              </el-menu-item>
             </template>
-          </el-menu-item> -->
-            </el-menu-item>
-          </el-submenu>
-        </el-menu>
-      </el-aside>
+          </template>
+          </el-menu>
+        </el-aside>
       <!--右侧内容主体-->
       <el-main>
         <!--路由占位符-->
