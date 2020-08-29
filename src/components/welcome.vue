@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>........</h1>
+    <h1>学生选课系统</h1>
   </div>
 </template>
 

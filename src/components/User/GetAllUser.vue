@@ -1,5 +1,11 @@
 <template>
-  <div class="block">
+  <div>
+    <el-breadcrumb separator-class="el-icon-arrow-right">
+    <el-breadcrumb-item :to="{ path: '/welcome' }">首页</el-breadcrumb-item>
+    <el-breadcrumb-item>权限管理</el-breadcrumb-item>
+    <el-breadcrumb-item>用户管理</el-breadcrumb-item>
+    <el-breadcrumb-item>查看用户</el-breadcrumb-item>
+     </el-breadcrumb>
     <el-row>
       <el-form :label-position="labelPosition" :model="formLabelAlign">
         <el-form-item>
@@ -42,7 +48,7 @@
     <el-dialog title="修改信息" :visible.sync="dialogFormVisible">
       <el-form :model="form">
         <el-form-item label="编号">
-          <el-input style="width:300px" v-model="form.id"></el-input>
+          <el-input style="width:300px" disabled="true" v-model="form.id"></el-input>
         </el-form-item>
         <el-form-item label="姓名">
           <el-input style="width:300px" v-model="form.userInfo.username"></el-input>

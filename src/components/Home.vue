@@ -4,12 +4,12 @@
     <el-header>
       <div>
         <div class="avatar_box">
-          <img src="../assets/logo.png" alt="">
+          <img src="../assets/logo.png" alt />
         </div>
         <span>学生选课系统</span>
       </div>
-      <el-button type="info" @click="logout">退出
-      </el-button></el-header>
+      <el-button type="info" @click="logout">退出</el-button>
+    </el-header>
     <!--页面主体区域-->
     <el-container>
       <!--侧边栏-->
@@ -46,7 +46,7 @@
                           <span>{{lastItem.menuname}}</span>
                         </template>
                       </el-menu-item>
-                    </el-submenu>  
+                    </el-submenu>
                   </template>
                   <template v-else>
                     <el-menu-item :index="subItem.url" :key="subItem.menuid" @click="saveNavState( subItem.url)">

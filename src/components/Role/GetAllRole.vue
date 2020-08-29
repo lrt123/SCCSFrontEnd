@@ -1,14 +1,14 @@
 <template>
   <div>
     <el-breadcrumb separator-class="el-icon-arrow-right">
-    <el-breadcrumb-item :to="{ path: '/welcome' }">首页</el-breadcrumb-item>
-    <el-breadcrumb-item>权限管理</el-breadcrumb-item>
-    <el-breadcrumb-item>角色管理</el-breadcrumb-item>
-    <el-breadcrumb-item>查看角色</el-breadcrumb-item>
-     </el-breadcrumb>
+      <el-breadcrumb-item :to="{ path: '/welcome' }">首页</el-breadcrumb-item>
+      <el-breadcrumb-item>权限管理</el-breadcrumb-item>
+      <el-breadcrumb-item>角色管理</el-breadcrumb-item>
+      <el-breadcrumb-item>查看角色</el-breadcrumb-item>
+    </el-breadcrumb>
     <template>
       <label id="tips1">角色筛选</label>
-      <el-select v-model="value" placeholder="请选择"  @change="roleSelect($event)">
+      <el-select v-model="value" placeholder="请选择" @change="roleSelect($event)">
         <el-option
           v-for="item in options"
           :key="item.value"
@@ -21,25 +21,15 @@
       <br />
       <el-button type="danger">删除所选角色</el-button>
       <el-button type="success">添加角色</el-button>
-      <el-table
-        ref="multipleTable"
-        :data="tableData"
-        tooltip-effect="dark"
-        style="width: 100%"
-        @selection-change="handleSelectionChange"
-      >
+      <el-table :data="tableData" border style="width: 100%">
         <el-table-column type="selection" width="60"></el-table-column>
-        <el-table-column label="角色名" width="120">
-          <template slot-scope="scope">{{scope.row.rolename}}</template>
-        </el-table-column>
-        <el-table-column prop="name" label="账户数量" width="150"></el-table-column>
-        <el-table-column label="拥有菜单" width="200">
-          <el-button type="primary" @click="dialogFormVisible = true">查看拥有菜单</el-button>
-        </el-table-column>
-        <el-table-column fixed="right" label="操作" width="200">
-          <template slot-scope="scope">
-            <el-button @click="handleClick(scope.row)" type="danger" size="small">删除</el-button>
-            <el-button type="success" size="small">编辑</el-button>
+        <el-table-column prop="roleid" label="角色ID" width="150"></el-table-column>
+        <el-table-column prop="rolename" label="角色名" width="120"></el-table-column>
+        <el-table-column fixed="right" label="操作" width="100">
+          <template slot-scope="scope"> 
+            <el-button  @click="dialogFormVisible = true" type="text" size="small">查看拥有菜单</el-button>
+            <el-button @click="deleteUserInfo(scope.row)" type="text" size="small">删除</el-button>
+            <el-button @click="editUserInfo(scope.row)" type="text" size="small">编辑</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -62,12 +52,19 @@
 export default {
   methods: {
     handleSelectionChange() {},
-    roleSelect(e){
+    roleSelect(e) {
       console.log(e);
-      this.$http.get('/role/getRoleById',{params: {roleId:e}}).then(res=>{
-        
-      })
-    }
+      this.$http
+        .get("/role/getRoleById", { params: { roleId: e } })
+        .then((res) => {
+          console.log(res.data);
+          if (res.data.data != null) {
+            this.tableData = [res.data.data];
+          } else {
+            (this.tableData.roleid = null), (this.tableData.rolename = null);
+          }
+        });
+    },
   },
   data() {
     const generateData = (_) => {
@@ -82,7 +79,7 @@ export default {
     };
     return {
       menulist: generateData(),
-      menuvalue: [1,4,6], //这是弹出框里的菜单列表
+      menuvalue: [], //这是弹出框里的菜单列表
       options: [
         {
           value: "R0001",
@@ -100,32 +97,8 @@ export default {
       value: "",
       tableData: [
         {
-        "roleid": "R0002",
-        rolename: "学生",
-        menus: [
-            {
-                "menuid": "M0001",
-                "pid": null,
-                "menuname": "选课",
-                "url": null,
-                "icon": null,
-                "childMenus": []
-            }]
-        },
-        {
-          date: "2016-05-03",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄",
-        },
-        {
-          date: "2016-05-02",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄",
-        },
-        {
-          date: "2016-05-04",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄",
+          roleid: null,
+          rolename: null,
         },
       ],
       multipleSelection: [],

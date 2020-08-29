@@ -74,6 +74,7 @@
              // if (res.data.code === 200) { 这是真的验证
                if(res.data.code){  //跳过登录验证
                 console.log(res.data)
+                
                 _that.$router.push('/home');
               } else {
                 console.log(res.data)
