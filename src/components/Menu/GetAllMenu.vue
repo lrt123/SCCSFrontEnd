@@ -67,9 +67,9 @@
       </el-table-column>
     </el-table>
     <el-dialog title="修改菜单" :visible.sync="dialogFormVisible" >
-      <el-form :model="EditMenuForm">
-        <el-form-item label="菜单ID">
-          <el-input v-model="EditMenuForm.menuid"></el-input>
+      <el-form  :model="EditMenuForm">
+        <el-form-item  label="菜单ID">
+          <el-input disabled="true" v-model="EditMenuForm.menuid"></el-input>
         </el-form-item>
         <el-form-item label="菜单父ID">
           <el-input v-model="EditMenuForm.pid"></el-input>
@@ -104,7 +104,6 @@
           url: '',
           icon: ''
         },
-        
         dialogFormVisible: false,
         loading: true,
         search: '',
@@ -136,7 +135,7 @@
           let code = res.data.code;
           if (code == 200){
             this.$message('删除成功');
-            this.reload;
+            location.reload();
           }else {
             this.$message('删除失败')
           }
@@ -153,6 +152,7 @@
         this.$http.post("/menu/updateMenu",this.EditMenuForm).then((res) => {
           if (res.data.code === 200 ) {
             this.$message({ message: "保存成功", type: "success"});
+            location.reload();
           }else {
             this.$message({ type: "info", message: "保存失败"})
           }

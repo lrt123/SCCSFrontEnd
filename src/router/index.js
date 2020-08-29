@@ -11,11 +11,14 @@ import Welcome from '../components/welcome'
 import SaveUser from '../components/User/SaveUser'
 import GetAllUser from '../components/User/GetAllUser'
 import UpdateUser from '../components/User/UpdateUser'
+import GetAllMenu from '../components/Menu/GetAllMenu'
+import SaveMenu from '../components/Menu/SaveMenu'
+import GetAllRole from '../components/Role/GetAllRole'
+import SaveRole from '../components/Role/SaveRole'
 import GetAllRole from '../components/Role/GetAllRole'
 import SaveRole from '../components/Role/SaveRole'
 import GetAllCourse from "../components/Course/GetAllCourse";
 import UpdateCourse from "../components/Course/UpdateCourse";
-
 import LateRegister from "../components/CourseManagement/LateRegister";
 
 Vue.use(Router)
@@ -45,10 +48,12 @@ export default new Router({
         },
         {
           path: '/SaveUser',
+          name: '添加用户',
           component: SaveUser
         },
         {
           path: '/UpdateUser',
+          name: '修改信息',
           component: UpdateUser
         },{
           path: '/inform/:id',
@@ -77,6 +82,17 @@ export default new Router({
           props: true
         },
         {
+          path: '/GetAllMenu',
+          name: "查看菜单",
+          component: GetAllMenu
+        },
+        {
+          path: '/SaveMenu',
+          name: "添加菜单",
+          component: SaveMenu
+        },
+        {
+
           path: '/lateregister',
           name: "LateRegister",
           component: LateRegister
@@ -88,6 +104,7 @@ export default new Router({
         {
           path: '/SaveRole',
           component: SaveRole
+
         },
         {
           path: '/GetAllCourse',
