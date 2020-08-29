@@ -13,6 +13,9 @@ import GetAllUser from '../components/User/GetAllUser'
 import UpdateUser from '../components/User/UpdateUser'
 import GetAllMenu from '../components/Menu/GetAllMenu'
 import SaveMenu from '../components/Menu/SaveMenu'
+import GetAllRole from '../components/Role/GetAllRole'
+import SaveRole from '../components/Role/SaveRole'
+import LateRegister from "../components/CourseManagement/LateRegister";
 
 Vue.use(Router)
 
@@ -27,12 +30,17 @@ export default new Router({
       children: [
         {
           path: '/welcome',
-          name: '首页',
+          meta: {
+            name: '首页'
+          },
           component: Welcome
         },
         {
           path: '/GetAllUser',
-          name: '查看用户',
+
+          meta: {
+            name: '查看用户'
+          },
           component: GetAllUser
         },
         {
@@ -79,6 +87,19 @@ export default new Router({
           path: '/SaveMenu',
           name: "添加菜单",
           component: SaveMenu
+        },
+        {
+          path: '/lateregister',
+          name: "LateRegister",
+          component: LateRegister
+        },
+        {
+          path: '/GetAllRole',
+          component: GetAllRole
+        },
+        {
+          path: '/SaveRole',
+          component: SaveRole
         }
       ]
     },
