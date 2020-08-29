@@ -13,6 +13,13 @@ import GetAllUser from '../components/User/GetAllUser'
 import UpdateUser from '../components/User/UpdateUser'
 import SaveCourse from "../components/Course/SaveCourse";
 import DeleteCourse from "../components/Course/DeleteCourse";
+import GetAllMenu from '../components/Menu/GetAllMenu'
+import SaveMenu from '../components/Menu/SaveMenu'
+import GetAllRole from '../components/Role/GetAllRole'
+import SaveRole from '../components/Role/SaveRole'
+import GetAllCourse from "../components/Course/GetAllCourse";
+import UpdateCourse from "../components/Course/UpdateCourse";
+import LateRegister from "../components/CourseManagement/LateRegister";
 
 Vue.use(Router)
 
@@ -27,18 +34,26 @@ export default new Router({
       children: [
         {
           path: '/welcome',
+          meta: {
+            name: '首页'
+          },
           component: Welcome
         },
         {
           path: '/GetAllUser',
+          meta: {
+            name: '查看用户'
+          },
           component: GetAllUser
         },
         {
           path: '/SaveUser',
+          name: '添加用户',
           component: SaveUser
         },
         {
           path: '/UpdateUser',
+          name: '修改信息',
           component: UpdateUser
         },{
           path: '/inform/:id',
@@ -75,6 +90,37 @@ export default new Router({
           path: '/DeleteCourse',
           name: "DeleteCourse",
           component: DeleteCourse
+          path: '/GetAllMenu',
+          name: "查看菜单",
+          component: GetAllMenu
+        },
+        {
+          path: '/SaveMenu',
+          name: "添加菜单",
+          component: SaveMenu
+        },
+        {
+
+          path: '/lateregister',
+          name: "LateRegister",
+          component: LateRegister
+        },
+        {
+          path: '/GetAllRole',
+          component: GetAllRole
+        },
+        {
+          path: '/SaveRole',
+          component: SaveRole
+
+        },
+        {
+          path: '/GetAllCourse',
+          component: GetAllCourse
+        },
+        {
+          path: '/UpdateCourse',
+          component: UpdateCourse
         }
       ]
     },

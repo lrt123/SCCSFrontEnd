@@ -1,11 +1,17 @@
 <template>
   <div>
+    <el-breadcrumb separator-class="el-icon-arrow-right">
+    <el-breadcrumb-item :to="{ path: '/welcome' }">首页</el-breadcrumb-item>
+    <el-breadcrumb-item>权限管理</el-breadcrumb-item>
+    <el-breadcrumb-item>用户管理</el-breadcrumb-item>
+    <el-breadcrumb-item>添加用户</el-breadcrumb-item>
+     </el-breadcrumb>
     <el-form ref="form" :model="form" label-width="80px">
       <el-form-item label="编号">
         <el-input v-model="form.id"></el-input>
       </el-form-item>
       <el-form-item label="角色">
-        <el-select v-model="form.roles.roleid" placeholder="请选择角色">
+        <el-select v-model="form.roles[0].roleid" placeholder="请选择角色">
           <el-option label="管理员" value="R0001"></el-option>
           <el-option label="老师" value="R0003"></el-option>
           <el-option label="学生" value="R0002"></el-option>
@@ -38,41 +44,41 @@
   </div>
 </template>
 <script>
-  export default {
-    data() {
-      return {
-
-        form: {
-          id: '',
-          userInfo: {
-            id: '',
-            username: '',
-            age: '',
-            sex: '',
-            phone: ''
-          },
-          roles: {
-            roleid: '',
-            rolename: '',
-            menus: null
-          }
+export default {
+  data() {
+    return {
+      form: {
+        id: "",
+        userInfo: {
+          id: "",
+          username: "",
+          age: "",
+          sex: "",
+          phone: "",
         },
-      };
-    },
-    methods: {
-      onSubmit() {
-        console.log(this.form)
-        this.$http.post('saveUser',this.form).then(res => {
-          console.log("返回状态码: "+res.data.code)
-        })
-
-        console.log("submit!");
+        roles: [{
+          roleid: "",
+          rolename: "",
+          menus: null,
+        }],
       },
-      handleChange(value) {
-
-      },
+    };
+  },
+  methods: {
+    onSubmit() {
+      console.log(this.form);
+      this.$http.post("/users/saveUser",this.form).then((res) => {
+        if (res.data.code === 200) {
+          this.$message({ message: "保存成功", type: "success" });
+        } else {
+          this.$message({type: "info", message: "保存失败" });
+        }
+      });
+      console.log("submit!");
     },
-  };
+    handleChange(value) {},
+  },
+};
 </script>
 <style scoped>
 </style>

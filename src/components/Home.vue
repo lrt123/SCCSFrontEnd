@@ -4,17 +4,26 @@
     <el-header>
       <div>
         <div class="avatar_box">
-          <img src="../assets/logo.png" alt="">
-        </div>
-        <span>学生选课系统</span>
+            <img src="../assets/logo.png" alt="">
+          </div>
+          <span>学生选课系统</span>
       </div>
       <el-button type="info" @click="logout">退出
-      </el-button></el-header>
+      </el-button>
+    </el-header>
     <!--页面主体区域-->
     <el-container>
+      <div
+        v-loading="loading"
+        v-loading.fullscreen.lock="true"
+        element-loading-text="拼命加载中"
+        element-loading-spinner="el-icon-loading"
+        element-loading-background="rgba(0, 0, 0, 0.8)"
+      >
+      </div>
       <!--侧边栏-->
       <el-aside :width="isCollapse ? '64px' : '200px'">
-        <div class="togglo-button" @click="toggleCollapse">|||</div>
+        <div class="togglo-button" @click="toggleCollapse"></div>
         <el-menu :router="true" background-color="#333744" text-color="#fff"
                  active-text-color="#409EFF" unique-opened :collapse="isCollapse" :collapse-transition="false"
                  :default-active="activePath">
@@ -46,7 +55,7 @@
                           <span>{{lastItem.menuname}}</span>
                         </template>
                       </el-menu-item>
-                    </el-submenu>  
+                    </el-submenu>
                   </template>
                   <template v-else>
                     <el-menu-item :index="subItem.url" :key="subItem.menuid" @click="saveNavState( subItem.url)">
@@ -76,6 +85,11 @@
         </el-aside>
       <!--右侧内容主体-->
       <el-main>
+<!--        <el-breadcrumb separator="/" separator-class="el-icon-arrow-right" :default-active="$route.path">-->
+<!--          <el-breadcrumb-item v-for="route in $route.matched" :key="route.path">-->
+<!--            {{route.name}}-->
+<!--          </el-breadcrumb-item>-->
+<!--        </el-breadcrumb>-->
         <!--路由占位符-->
         <router-view></router-view>
       </el-main>
@@ -89,7 +103,8 @@
       return {
         menulist: [],
         isCollapse: false,
-        activePath: ''
+        activePath: '',
+        loading: true
       }
     },
     created () {
@@ -102,10 +117,11 @@
         this.$router.push('/login')
       },
       async getMenuList () {
-        const { data: res } = await this.$http.get('/users/getUserMenu?id=XS0002') // eslint-disable-line no-unused-vars
+        const { data: res } = await this.$http.get('/users/getUserMenu',{params:{id:sessionStorage.getItem("username")}}) // eslint-disable-line no-unused-vars
         // if (res.meta.staus !== 200) return this.$message.error(res.meta.msg)
         console.log(res)
         this.menulist = res.data
+        this.loading=false
       },
       toggleCollapse () {
         this.isCollapse = !this.isCollapse
