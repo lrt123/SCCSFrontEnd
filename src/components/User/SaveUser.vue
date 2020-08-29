@@ -38,41 +38,41 @@
   </div>
 </template>
 <script>
-  export default {
-    data() {
-      return {
-
-        form: {
-          id: '',
-          userInfo: {
-            id: '',
-            username: '',
-            age: '',
-            sex: '',
-            phone: ''
-          },
-          roles: {
-            roleid: '',
-            rolename: '',
-            menus: null
-          }
+export default {
+  data() {
+    return {
+      form: {
+        id: "",
+        userInfo: {
+          id: "",
+          username: "",
+          age: "",
+          sex: "",
+          phone: "",
         },
-      };
-    },
-    methods: {
-      onSubmit() {
-        console.log(this.form)
-        this.$http.post('saveUser',this.form).then(res => {
-          console.log("返回状态码: "+res.data.code)
-        })
-
-        console.log("submit!");
+        roles: {
+          roleid: "",
+          rolename: "",
+          menus: null,
+        },
       },
-      handleChange(value) {
-
-      },
+    };
+  },
+  methods: {
+    onSubmit() {
+      console.log(this.form);
+      this.$http.post("/users/saveUser",this.form).then((res) => {
+        if (res.data.code === 200) {
+          this.$message({ message: "保存成功", type: "success" });
+        } else {
+          this.$message({type: "info", message: "保存失败" });
+        }
+      });
+      console.log("submit!");
     },
-  };
+    handleChange(value) {},
+  },
+};
 </script>
 <style scoped>
 </style>
