@@ -11,6 +11,9 @@ import Welcome from '../components/welcome'
 import SaveUser from '../components/User/SaveUser'
 import GetAllUser from '../components/User/GetAllUser'
 import UpdateUser from '../components/User/UpdateUser'
+import SaveCourse from "../components/Course/SaveCourse";
+import DeleteCourse from "../components/Course/DeleteCourse";
+
 Vue.use(Router)
 
 export default new Router({
@@ -20,7 +23,7 @@ export default new Router({
     {
       path: '/home',
       component: Home,
-      redirect: '/welcome',
+      /*redirect: '/welcome',*/
       children: [
         {
           path: '/welcome',
@@ -62,6 +65,16 @@ export default new Router({
           name: "InformEdit",
           component: InformEdit,
           props: true
+        },
+        {
+          path: '/SaveCourse',
+          name: "SaveCourse",
+          component: SaveCourse
+        },
+        {
+          path: '/DeleteCourse',
+          name: "DeleteCourse",
+          component: DeleteCourse
         }
       ]
     },
