@@ -30,8 +30,8 @@
     data () {
       return {
         loginForm: {
-          username: 'hwj',
-          password: 'hwj1234'
+          username: '',
+          password: ''
         },
         loginFormRules: {
           username: [
@@ -68,16 +68,14 @@
         this.$refs.loginFormRef.validate((valid) => {
           if (valid) {
             const _that = this
-            this.$http.post('/users/login', this.$qs.stringify(this.ruleForm)).then(res => {
+            this.$http.post('/users/login', this.$qs.stringify(this.loginForm)).then(res => {
               /* 模拟服务器响应 */
-
-             // if (res.data.code === 200) { 这是真的验证
-               if(res.data.code){  //跳过登录验证
-                console.log(res.data)
-                
+              if (res.data.code === 200) {// 这是真的验证
+                console.log(res.data.data);
+                sessionStorage.setItem('username',res.data.data.id);
                 _that.$router.push('/home');
               } else {
-                console.log(res.data)
+                this.$message.error('错了哦,'+res.data.message);
               }
             })
           } else {

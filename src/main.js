@@ -19,6 +19,7 @@ Vue.prototype.$qs = qs;
 // Vue.prototype.$url = 'http://localhost:8080/SCCS'
 // 需要与后端对接时注释掉
 // require('./mock')
+Vue.prototype.$username;
 new Vue({
   router,
   render: h => h(App)
