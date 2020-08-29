@@ -11,7 +11,7 @@
         </el-form-item>
       </el-form>
     </el-row>
-    <el-form :label-position="labelPosition" label-width="80px"  :model="form">
+    <el-form :label-position="labelPosition" label-width="80px" :model="form">
       <el-form-item label="姓名">
         <el-input style="width:300px" v-model="form.userInfo.username"></el-input>
       </el-form-item>
@@ -32,7 +32,7 @@
         <el-input style="width:300px" v-model="form.userInfo.phone"></el-input>
       </el-form-item>
       <el-form-item label="角色">
-        <el-select v-model="form.roles[0]" placeholder="请选择角色">
+        <el-select v-model="form.roles[0].roleid" placeholder="请选择角色">
           <el-option label="管理员" value="R0001"></el-option>
           <el-option label="老师" value="R0003"></el-option>
           <el-option label="学生" value="R0002"></el-option>
@@ -45,52 +45,62 @@
   </div>
 </template>
 <script>
-  export default {
-    data() {
-      return {
-        labelPosition: "right",
-        formID: {
-          id: '',
+export default {
+  data() {
+    return {
+      labelPosition: "right",
+      formID: {
+        id: "",
+      },
+      form: {
+        id: "",
+        userInfo: {
+          id: "",
+          username: "",
+          age: "",
+          sex: "",
+          phone: "",
         },
-        form: {
-          id: '',
-          userInfo: {
-            id: '',
-            username: '',
-            age: '',
-            sex: '',
-            phone: ''
+        roles: [
+          {
+            roleid: "",
+            rolename: "",
+            menus: null,
           },
-          roles:[ {
-            roleid: '',
-            rolename: '',
-            menus: null
-          }],
-
-        }
-      };
-    },
-    methods: {
-      selectUser(){
-        console.log('form表单:'+this.formID.id);
-        this.$http.get('updateUser',this.formID).then(res => {
-          this.form = res.data.data;
-          console.log(res.data.data);
+        ],
+      },
+    };
+  },
+  methods: {
+    selectUser() {
+      this.$http
+        .get("/users/getUserById", {
+          params: {
+            id: this.formID.id,
+          },
         })
-      },
+        .then((res) => {
+          this.form = res.data.data;
+          console.log(res.data);
+        });
+    },
 
-      onSubmit() {
-        this.form.id = this.formID.id;
-        this.form.userInfo.id = this.formID.id;
-        console.log('form表单:'+this.form.id);
-        console.log('form表单'+this.form.userInfo.id);
-        console.log("submit!");
-      },
-      handleChange(value) {
-        console.log(value);
-      }
-    }
-  };
+    onSubmit() {
+      this.form.id = this.formID.id;
+      this.form.userInfo.id = this.formID.id;
+      this.$http.post("/users/updateUser", this.form).then((res) => {
+        if (res.data.code === 200) {
+          this.$message({ message: "更新成功", type: "success" });
+        } else {
+          this.$message({ type: "info", message: "更新失败" });
+        }
+      });
+    },
+    handleChange(value) {
+      console.log(value);
+    },
+  },
+};
 </script>
 <style scoped>
 </style>
