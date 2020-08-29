@@ -14,6 +14,8 @@ import UpdateUser from '../components/User/UpdateUser'
 import GetAllRole from '../components/Role/GetAllRole'
 import SaveRole from '../components/Role/SaveRole'
 
+import LateRegister from "../components/CourseManagement/LateRegister";
+
 Vue.use(Router)
 
 export default new Router({
@@ -71,6 +73,11 @@ export default new Router({
           name: "InformEdit",
           component: InformEdit,
           props: true
+        },
+        {
+          path: '/lateregister',
+          name: "LateRegister",
+          component: LateRegister
         },
         {
           path: '/GetAllRole',
