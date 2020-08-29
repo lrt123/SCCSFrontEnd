@@ -50,15 +50,17 @@
         console.log(this.SaveMenuForm)
         this.$refs['SaveMenuForm'].validate((valid) => {
           if (valid) {
+            alert('正在尝试添加');
             this.$http.post("/menu/saveMenu",this.SaveMenuForm).then((res) => {
               if (res.data.code === 200 ) {
                 this.$message({ message: "保存成功", type: "success"});
+                location.reload();
               }else {
                 this.$message({ type: "info", message: "保存失败"})
               }
             });
           } else {
-              console.log('输入属性格式出错，添加失败');
+              alert('输入属性格式出错，添加失败');
                 return false;
             }
         });
