@@ -11,6 +11,9 @@ import Welcome from '../components/welcome'
 import SaveUser from '../components/User/SaveUser'
 import GetAllUser from '../components/User/GetAllUser'
 import UpdateUser from '../components/User/UpdateUser'
+import GetAllRole from '../components/Role/GetAllRole'
+import SaveRole from '../components/Role/SaveRole'
+
 Vue.use(Router)
 
 export default new Router({
@@ -24,10 +27,16 @@ export default new Router({
       children: [
         {
           path: '/welcome',
+          meta: {
+            name: '首页'
+          },
           component: Welcome
         },
         {
           path: '/GetAllUser',
+          meta: {
+            name: '查看用户'
+          },
           component: GetAllUser
         },
         {
@@ -62,6 +71,14 @@ export default new Router({
           name: "InformEdit",
           component: InformEdit,
           props: true
+        },
+        {
+          path: '/GetAllRole',
+          component: GetAllRole
+        },
+        {
+          path: '/SaveRole',
+          component: SaveRole
         }
       ]
     },
