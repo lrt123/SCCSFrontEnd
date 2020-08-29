@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>学生选课系统</h1>
+    <h1>这里是welcome</h1>
   </div>
 </template>
 
