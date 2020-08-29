@@ -11,6 +11,10 @@ import Welcome from '../components/welcome'
 import SaveUser from '../components/User/SaveUser'
 import GetAllUser from '../components/User/GetAllUser'
 import UpdateUser from '../components/User/UpdateUser'
+import GetAllCourse from '../components/Course/GetAllCourse'
+import UpdateCourse from "../components/Course/UpdateCourse";
+
+
 Vue.use(Router)
 
 export default new Router({
@@ -62,6 +66,14 @@ export default new Router({
           name: "InformEdit",
           component: InformEdit,
           props: true
+        },
+        {
+          path: '/GetAllCourse',
+          component: GetAllCourse
+        },
+        {
+          path: '/UpdateCourse',
+          component: UpdateCourse
         }
       ]
     },
