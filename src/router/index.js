@@ -11,9 +11,10 @@ import Welcome from '../components/welcome'
 import SaveUser from '../components/User/SaveUser'
 import GetAllUser from '../components/User/GetAllUser'
 import UpdateUser from '../components/User/UpdateUser'
+import GetAllMenu from '../components/Menu/GetAllMenu'
+import SaveMenu from '../components/Menu/SaveMenu'
 import GetAllRole from '../components/Role/GetAllRole'
 import SaveRole from '../components/Role/SaveRole'
-
 import LateRegister from "../components/CourseManagement/LateRegister";
 
 Vue.use(Router)
@@ -36,6 +37,7 @@ export default new Router({
         },
         {
           path: '/GetAllUser',
+
           meta: {
             name: '查看用户'
           },
@@ -43,10 +45,12 @@ export default new Router({
         },
         {
           path: '/SaveUser',
+          name: '添加用户',
           component: SaveUser
         },
         {
           path: '/UpdateUser',
+          name: '修改信息',
           component: UpdateUser
         },{
           path: '/inform/:id',
@@ -73,6 +77,16 @@ export default new Router({
           name: "InformEdit",
           component: InformEdit,
           props: true
+        },
+        {
+          path: '/GetAllMenu',
+          name: "查看菜单",
+          component: GetAllMenu
+        },
+        {
+          path: '/SaveMenu',
+          name: "添加菜单",
+          component: SaveMenu
         },
         {
           path: '/lateregister',
