@@ -15,8 +15,6 @@ import GetAllMenu from '../components/Menu/GetAllMenu'
 import SaveMenu from '../components/Menu/SaveMenu'
 import GetAllRole from '../components/Role/GetAllRole'
 import SaveRole from '../components/Role/SaveRole'
-import GetAllRole from '../components/Role/GetAllRole'
-import SaveRole from '../components/Role/SaveRole'
 import GetAllCourse from "../components/Course/GetAllCourse";
 import UpdateCourse from "../components/Course/UpdateCourse";
 import LateRegister from "../components/CourseManagement/LateRegister";
