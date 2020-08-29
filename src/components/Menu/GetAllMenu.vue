@@ -104,7 +104,6 @@
           url: '',
           icon: ''
         },
-
         dialogFormVisible: false,
         loading: true,
         search: '',
