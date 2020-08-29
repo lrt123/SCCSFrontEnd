@@ -1,5 +1,11 @@
 <template>
   <div>
+    <el-breadcrumb separator-class="el-icon-arrow-right">
+    <el-breadcrumb-item :to="{ path: '/welcome' }">首页</el-breadcrumb-item>
+    <el-breadcrumb-item>权限管理</el-breadcrumb-item>
+    <el-breadcrumb-item>用户管理</el-breadcrumb-item>
+    <el-breadcrumb-item>信息修改</el-breadcrumb-item>
+    </el-breadcrumb>
     <el-row>
       <el-form :label-position="labelPosition" label-width="55px" :model="formID">
         <el-form-item>

@@ -1,11 +1,17 @@
 <template>
   <div>
+    <el-breadcrumb separator-class="el-icon-arrow-right">
+    <el-breadcrumb-item :to="{ path: '/welcome' }">首页</el-breadcrumb-item>
+    <el-breadcrumb-item>权限管理</el-breadcrumb-item>
+    <el-breadcrumb-item>用户管理</el-breadcrumb-item>
+    <el-breadcrumb-item>添加用户</el-breadcrumb-item>
+     </el-breadcrumb>
     <el-form ref="form" :model="form" label-width="80px">
       <el-form-item label="编号">
         <el-input v-model="form.id"></el-input>
       </el-form-item>
       <el-form-item label="角色">
-        <el-select v-model="form.roles.roleid" placeholder="请选择角色">
+        <el-select v-model="form.roles[0].roleid" placeholder="请选择角色">
           <el-option label="管理员" value="R0001"></el-option>
           <el-option label="老师" value="R0003"></el-option>
           <el-option label="学生" value="R0002"></el-option>
@@ -50,11 +56,11 @@ export default {
           sex: "",
           phone: "",
         },
-        roles: {
+        roles: [{
           roleid: "",
           rolename: "",
           menus: null,
-        },
+        }],
       },
     };
   },
