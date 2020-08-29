@@ -13,6 +13,8 @@ import GetAllUser from '../components/User/GetAllUser'
 import UpdateUser from '../components/User/UpdateUser'
 import GetAllRole from '../components/Role/GetAllRole'
 import SaveRole from '../components/Role/SaveRole'
+import GetAllCourse from "../components/Course/GetAllCourse";
+import UpdateCourse from "../components/Course/UpdateCourse";
 
 import LateRegister from "../components/CourseManagement/LateRegister";
 
@@ -86,6 +88,14 @@ export default new Router({
         {
           path: '/SaveRole',
           component: SaveRole
+        },
+        {
+          path: '/GetAllCourse',
+            component: GetAllCourse
+        },
+        {
+          path: '/UpdateCourse',
+            component: UpdateCourse
         }
       ]
     },
