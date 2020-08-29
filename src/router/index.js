@@ -11,9 +11,10 @@ import Welcome from '../components/welcome'
 import SaveUser from '../components/User/SaveUser'
 import GetAllUser from '../components/User/GetAllUser'
 import UpdateUser from '../components/User/UpdateUser'
-import GetAllCourse from '../components/Course/GetAllCourse'
-import UpdateCourse from "../components/Course/UpdateCourse";
+import GetAllRole from '../components/Role/GetAllRole'
+import SaveRole from '../components/Role/SaveRole'
 
+import LateRegister from "../components/CourseManagement/LateRegister";
 
 Vue.use(Router)
 
@@ -28,10 +29,16 @@ export default new Router({
       children: [
         {
           path: '/welcome',
+          meta: {
+            name: '首页'
+          },
           component: Welcome
         },
         {
           path: '/GetAllUser',
+          meta: {
+            name: '查看用户'
+          },
           component: GetAllUser
         },
         {
@@ -68,12 +75,17 @@ export default new Router({
           props: true
         },
         {
-          path: '/GetAllCourse',
-          component: GetAllCourse
+          path: '/lateregister',
+          name: "LateRegister",
+          component: LateRegister
         },
         {
-          path: '/UpdateCourse',
-          component: UpdateCourse
+          path: '/GetAllRole',
+          component: GetAllRole
+        },
+        {
+          path: '/SaveRole',
+          component: SaveRole
         }
       ]
     },
